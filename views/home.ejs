@@ -35,7 +35,12 @@
                             <img src="<%= singer.image %>" width="100">
                         </td>
                         <td>
-                            <a href="/remove/<%= singer._id %>">Remove</a>
+                            <a
+                                href="/remove/<%= singer._id %>"
+                                onclick="return confirm('Are you sure?')"
+                            >
+                                Remove
+                            </a>
                             <br>
                             <a href="/update/<%= singer._id %>">Update</a>
                         </td>

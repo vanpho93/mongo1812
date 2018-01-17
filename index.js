@@ -19,7 +19,17 @@ app.get('/add', (req, res) => {
 });
 
 app.post('/add', parser, (req, res) => {
-    res.send(req.body);
+    const { name, link, image } = req.body;
+    const singer = new Singer({ name, link, image });
+    singer.save()
+    .then(() => res.redirect('/'))
+    .catch(() => res.send('Singer existed'));
+});
+
+app.get('/remove/:_id', (req, res) => {
+    Singer.findByIdAndRemove(req.params._id)
+    .then(() => res.redirect('/'))
+    .catch(err => res.send(err));
 });
 
 app.listen(3000, () => console.log('Server started!'));
