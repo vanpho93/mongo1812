@@ -26,6 +26,16 @@ app.post('/add', parser, (req, res) => {
     .catch(() => res.send('Singer existed'));
 });
 
+app.get('/update/:_id', (req, res) => {
+    Singer.findById(req.params._id)
+    .then(singer => res.render('update', { singer }))
+    .catch(err => res.send(err));
+});
+
+app.post('/update/:_id', parser, (req, res) => {
+    
+});
+
 app.get('/remove/:_id', (req, res) => {
     Singer.findByIdAndRemove(req.params._id)
     .then(() => res.redirect('/'))
