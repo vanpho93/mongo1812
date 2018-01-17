@@ -28,17 +28,29 @@ app.post('/add', parser, (req, res) => {
 
 app.get('/update/:_id', (req, res) => {
     Singer.findById(req.params._id)
-    .then(singer => res.render('update', { singer }))
+    .then(singer => {
+        if (!singer) return res.send('Khong tim thay');
+        res.render('update', { singer });
+    })
     .catch(err => res.send(err));
 });
 
 app.post('/update/:_id', parser, (req, res) => {
-    
+    const { image, name, link } = req.body;
+    Singer.findByIdAndUpdate(req.params._id, { name, image, link })
+    .then(singer => {
+        if (!singer) return res.send('Khong tim thay');
+        res.render('update', { singer });
+    })
+    .catch(err => res.send(err));
 });
 
 app.get('/remove/:_id', (req, res) => {
     Singer.findByIdAndRemove(req.params._id)
-    .then(() => res.redirect('/'))
+    .then(singer => {
+        if (!singer) return res.send('Khong tim thay');
+        res.redirect('/');
+    })
     .catch(err => res.send(err));
 });
 
