@@ -8,7 +8,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 reload(app);
 
-app.get('/', (req, res) => res.render('home'));
+app.get('/', (req, res) => {
+    Singer.find({})
+    .then(singers => res.render('home', { singers }))
+    .catch(err => res.send(err));
+});
 
 app.get('/add', (req, res) => {
     res.render('add');

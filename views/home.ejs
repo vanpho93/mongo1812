@@ -23,34 +23,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <a href="/name">John</a>
-                    </td>
-                    <td>
-                        <img src="https://zmp3-photo.zadn.vn/thumb/240_240/avatars/a/0/a0927398989d4c5b18c56880bd56442b_1509531352.jpg" width="100">
-                    </td>
-                    <td>
-                        <a href="/remove">Remove</a>
-                        <br>
-                        <a href="/update">Update</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <a href="/name">John</a>
-                    </td>
-                    <td>
-                        <img src="https://zmp3-photo.zadn.vn/thumb/240_240/avatars/a/0/a0927398989d4c5b18c56880bd56442b_1509531352.jpg" width="100">
-                    </td>
-                    <td>
-                        <a href="/remove">Remove</a>
-                        <br>
-                        <a href="/update">Update</a>
-                    </td>
-                </tr>
+                <% singers.forEach((singer, index) => { %>
+                    <tr>
+                        <td>
+                            <%= index + 1 %>
+                        </td>
+                        <td>
+                            <a href="<%= singer.link %>" target="_blank"><%= singer.name %></a>
+                        </td>
+                        <td>
+                            <img src="<%= singer.image %>" width="100">
+                        </td>
+                        <td>
+                            <a href="/remove/<%= singer._id %>">Remove</a>
+                            <br>
+                            <a href="/update/<%= singer._id %>">Update</a>
+                        </td>
+                    </tr>
+                <% }) %>
             </tbody>
         </table>
         <a href="/add">Add new singer</a>
